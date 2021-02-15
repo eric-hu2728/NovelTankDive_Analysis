@@ -1,0 +1,60 @@
+*load the file
+
+import numpy as np
+from numpy import genfromtxt
+test1 = genfromtxt('/home/analysis/Desktop/test1.csv', delimiter=',')
+x=np.array(test1)
+
+*remove NaN values
+
+result = x[np.logical_not(np.isnan(x))]
+
+*determine min and max
+
+rmin = np.min(result)
+rmax = np.max(result)
+
+*subtract max-min to get range (smaller value is higher up in tank)
+
+rrange = rmax-rmin
+
+*multiply by .333 to determine 1/3 of range
+
+zone_size = rrange*.33333
+
+*define top zone cutoff
+
+top_zone = rmin + zone_size
+
+*define minute intervals. Video was at 60 fps, but every period cut by 100 frames to mitigate  NaN cleanup
+
+min1 = result[0:3500]
+min2 = result[3500:7100]
+min3 = result[7100:10700]
+min4 = result[10700:14300]
+min5 = result[14300:17900]
+
+*isolate items in each minute that are size top_zone or lower
+
+min1_top = min1[min1<top_zone]
+min2_top = min2[min2<top_zone]
+min3_top = min3[min3<top_zone]
+min4_top = min4[min4<top_zone]
+min5_top = min5[min5<top_zone]
+
+
+*count the size of each min_top
+
+min1_size = np.size(min1_top)
+min2_size = np.size(min2_top)
+min3_size = np.size(min3_top)
+min4_size = np.size(min4_top)
+min5_size = np.size(min5_top)
+
+*finally, divide each minute by 60, to get an overall time in the top zone in terms of seconds,
+
+min1_time = min1_size/60
+min2_time = min2_size/60
+min3_time = min3_size/60
+min4_time = min4_size/60
+min5_time = min5_size/60
