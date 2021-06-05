@@ -1,0 +1,8 @@
+# NovelTankDive_Analysis
+﻿The Novel Tank Dive is a method of evaluating anxiety in zebrafish. During a study on how FMR1 mutation and DMSO exposure affect zebrafish anxiety-like behavior, our team, in true open-source fashion, abandoned the outrageously over-priced and under-performing commercial animal tracking software aggressively marketed to zebrafish labs around the world, and instead adopted idTracker.ai – a deep learning-based set of tools that gave us much more flexibility but also required us to improve our data analysis skills.
+
+Once we were able to obtain Y values during the Novel Tank Dive with near 100% accuracy, we were faced with the task of turning raw Y position pixel values into meaningful information. Thus, NovelTankDive_Analysis was born. 
+
+A real-life example of how data should be formatted is provided in the “test_Y_position_data.csv” file provided in this repository. This single column of numbers represents the Y position of a fish tracked with idTracker.ai. Originally, the output csv file was composed of two columns: the first column contained the video frame number, and the second contained the Y position of the tracked body centroid. I cut the frame column as well as a few thousand initially un-tracked frames that displayed a NaN value. The resulting single-column csv is therefore cleaned up and ready to go for analysis using this project's script. Future quality of life updates will roll out as my coding skills improve.
+
+Note that in computing, the origin of an image is in the top left corner, rather than in the bottom left as is customary in the math we've been taught since elementary school. This means that larger Y values reflect the fish moving down in the tank,
