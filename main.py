@@ -1,6 +1,6 @@
 import numpy as np
 from numpy import genfromtxt
-y_vals = genfromtxt('/home/eo/Desktop/test_Y_position_data.csv', delimiter=',')
+y_vals = genfromtxt('~path/testdata.csv', delimiter=',')
 y_array=np.array(y_vals)
 # Remove NaN values
 y_result = y_array[np.logical_not(np.isnan(y_array))]
@@ -37,5 +37,10 @@ min2_time = min2_size/60
 min3_time = min3_size/60
 min4_time = min4_size/60
 min5_time = min5_size/60
-# Print 'er out
-print('min1:',min1_time,'min2:',min2_time,'min3:',min3_time,'min4:',min4_time,'min5:',min5_time)
+# Convert these to csv for file output
+import pandas as pd
+results_header=('min1','min2','min3','min4','min5')
+results=(min1_time, min2_time, min3_time, min4_time, min5_time)
+dict= {'minute':results_header, 'top zone time':results}
+df = pd.DataFrame(dict)
+df.to_csv('~path/results.csv')
