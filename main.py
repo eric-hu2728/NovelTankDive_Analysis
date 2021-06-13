@@ -1,7 +1,11 @@
 import matplotlib.pyplot as plt
 import numpy as np
 from numpy import genfromtxt
-y_vals = genfromtxt('/home/eo/Desktop/Y_testfish.csv', delimiter=',')
+import PIL
+import os
+my_path = '/home/eo/Desktop/'
+my_file = 'Y_testfish.csv'
+y_vals = genfromtxt(my_path+my_file, delimiter=',')
 y_array=np.array(y_vals)
 # Remove NaN values
 y_result = y_array[np.logical_not(np.isnan(y_array))]
@@ -22,14 +26,14 @@ min4 = y_result[10801:14400]
 min5 = y_result[14401:18000]
 
 #Part 1: Determining number of top zone entries by test minute
+plt.gca().invert_yaxis()
 plt.plot(min1, color='magenta', marker='o',mfc='pink' )
 plt.xticks(range(0,len(min1)+1, 120))
 plt.ylabel('Y position') #set the label for y axis
 plt.xlabel('time (120 frames per point)') #set the label for x-axis
 plt.axhline(y=top_zone)
 plt.title("minute1") #set the title of the graph
-plt.gca().invert_yaxis()
-plt.show() #display the graph
+plt.savefig(my_path+'Minute_1.tif')
 
 plt.plot(min2, color='magenta', marker='o',mfc='pink' )
 plt.xticks(range(0,len(min2)+1, 120))
@@ -37,8 +41,7 @@ plt.ylabel('Y position') #set the label for y axis
 plt.xlabel('time (120 frames per point)') #set the label for x-axis
 plt.axhline(y=top_zone)
 plt.title("minute2") #set the title of the graph
-plt.gca().invert_yaxis()
-plt.show() #display the graph
+plt.savefig(my_path+'Minute_2.tif')
 
 plt.plot(min3, color='magenta', marker='o',mfc='pink' )
 plt.xticks(range(0,len(min3)+1, 120))
@@ -46,8 +49,7 @@ plt.ylabel('Y position') #set the label for y axis
 plt.xlabel('time (120 frames per point)') #set the label for x-axis
 plt.axhline(y=top_zone)
 plt.title("minute3") #set the title of the graph
-plt.gca().invert_yaxis()
-plt.show() #display the graph
+plt.savefig(my_path+'Minute_3.tif')
 
 plt.plot(min4, color='magenta', marker='o',mfc='pink' )
 plt.xticks(range(0,len(min4)+1, 120))
@@ -55,8 +57,7 @@ plt.ylabel('Y position') #set the label for y axis
 plt.xlabel('time (120 frames per point)') #set the label for x-axis
 plt.axhline(y=top_zone)
 plt.title("minute4") #set the title of the graph
-plt.gca().invert_yaxis()
-plt.show() #display the graph
+plt.savefig(my_path+'Minute_4.tif')
 
 plt.plot(min5, color='magenta', marker='o',mfc='pink' )
 plt.xticks(range(0,len(min5)+1, 120))
@@ -64,8 +65,7 @@ plt.ylabel('Y position') #set the label for y axis
 plt.xlabel('time (120 frames per point)') #set the label for x-axis
 plt.axhline(y=top_zone)
 plt.title("minute5") #set the title of the graph
-plt.gca().invert_yaxis()
-plt.show() #display the graph
+plt.savefig(my_path+'Minute_5.tif')
 
 #Part 2: Determining time in top zone
 # Isolate only the frames, per test minute, for which the fish is present within the top zone.
